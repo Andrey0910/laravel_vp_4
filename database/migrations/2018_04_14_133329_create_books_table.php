@@ -22,6 +22,18 @@ class CreateBooksTable extends Migration
             $table->string('description');
             $table->timestamps();
         });
+
+
+        $faker = \Faker\Factory::create();
+        for ($i=0; $i<20; $i++){
+            $book = new \App\Books();
+            $book->book_name = $faker->text(random_int(10, 50));
+            $book->section_books_id = random_int(1, 5);
+            $book->price = random_int(100, 2000);
+            $book->photo = random_int(1, 10000).$faker->firstName.'.jpg';
+            $book->description = $faker->text;
+            $book->save();
+        }
     }
 
     /**

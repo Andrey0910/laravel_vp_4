@@ -15,5 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/section-books', 'SectionBooksController@asd');
-Route::get('/books', 'BooksController@fff');
+Route::get('/', 'BooksController@index');
+Route::get('/books/category/{section_id}', 'BooksController@category');
+Route::get('/books/news', 'BooksController@news');

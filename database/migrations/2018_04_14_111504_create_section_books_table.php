@@ -19,6 +19,13 @@ class CreateSectionBooksTable extends Migration
             $table->string('description');
             $table->timestamps();
         });
+        $faker = \Faker\Factory::create();
+        for ($i=0; $i<5; $i++){
+            $sectionBooks = new \App\SectionBooks();
+            $sectionBooks->section_name = $faker->text(random_int(10, 50));
+            $sectionBooks->description = $faker->text;
+            $sectionBooks->save();
+        }
     }
 
     /**
