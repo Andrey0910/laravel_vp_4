@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/books', 'BooksController@index');
-    Route::get('/category/index/{section_id}', 'SectionBooksController@index');
+    Route::get('/category/{section_id}', 'SectionBooksController@index');
     Route::get('/news', 'NewsController@index');
     Route::get('/about', 'AboutController@index');
+    Route::get('/books/logout', 'BooksController@logout');
 });
 
 Auth::routes();
