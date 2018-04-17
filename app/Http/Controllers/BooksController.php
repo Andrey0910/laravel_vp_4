@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $data = [
@@ -15,21 +20,5 @@ class BooksController extends Controller
             'sectionBooks' => SectionBooks::all()
         ];
         return view('index', $data);
-    }
-
-    public function category($section_id)
-    {
-        $data = [
-            'books' => Books::where('section_books_id', $section_id)->get(),
-            'sectionBooks' => SectionBooks::all()
-        ];
-        return view('category', $data);
-    }
-
-    public function news(){
-        $data = [
-            'sectionBooks' => SectionBooks::all()
-        ];
-        return view('news', $data);
     }
 }

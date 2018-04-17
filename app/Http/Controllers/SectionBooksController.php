@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Books;
+use App\SectionBooks;
 use Illuminate\Http\Request;
 
 class SectionBooksController extends Controller
 {
-    public function asd(){
+    public function index($section_id)
+    {
         $data = [
-            'asd' => 'aaa'
+            'books' => Books::where('section_books_id', $section_id)->get(),
+            'sectionBooks' => SectionBooks::all()
         ];
-        return view('section-books.index', $data);
+        return view('category', $data);
     }
 }

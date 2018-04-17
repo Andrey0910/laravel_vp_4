@@ -17,8 +17,8 @@
           <ul class="nav-list">
             <li class="nav-list__item"><a href="#" class="nav-list__item__link">Главная</a></li>
             <li class="nav-list__item"><a href="#" class="nav-list__item__link">Мои заказы</a></li>
-            <li class="nav-list__item"><a href="/books/news" class="nav-list__item__link">Новости</a></li>
-            <li class="nav-list__item"><a href="#" class="nav-list__item__link">О компании</a></li>
+            <li class="nav-list__item"><a href="/news" class="nav-list__item__link">Новости</a></li>
+            <li class="nav-list__item"><a href="/about" class="nav-list__item__link">О компании</a></li>
           </ul>
         </nav>
         <div class="header-contact">
@@ -41,7 +41,7 @@
             <div class="sidebar-item__content">
               <ul class="sidebar-category">
                 @foreach($sectionBooks as $section)
-                  <li class="sidebar-category__item"><a href="/books/category/{{$section->id}}" class="sidebar-category__item__link">{{$section->section_name}}</a></li>
+                  <li class="sidebar-category__item"><a href="/category/index/{{$section->id}}" class="sidebar-category__item__link">{{$section->section_name}}</a></li>
                 @endforeach
               </ul>
             </div>
