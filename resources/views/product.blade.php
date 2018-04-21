@@ -5,20 +5,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="css/libs.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="/css/libs.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/media.css">
   </head>
   <body>
     <div class="main-wrapper">
       <header class="main-header">
-        <div class="logotype-container"><a href="#" class="logotype-link"><img src="img/logo.png" alt="Логотип"></a></div>
+        <div class="logotype-container"><a href="#" class="logotype-link"><img src="/img/logo.png" alt="Логотип"></a></div>
         <nav class="main-navigation">
           <ul class="nav-list">
-            <li class="nav-list__item"><a href="#" class="nav-list__item__link">Главная</a></li>
+            <li class="nav-list__item"><a href="/books" class="nav-list__item__link">Главная</a></li>
             <li class="nav-list__item"><a href="#" class="nav-list__item__link">Мои заказы</a></li>
-            <li class="nav-list__item"><a href="#" class="nav-list__item__link">Новости</a></li>
-            <li class="nav-list__item"><a href="#" class="nav-list__item__link">О компании</a></li>
+            <li class="nav-list__item"><a href="/news" class="nav-list__item__link">Новости</a></li>
+            <li class="nav-list__item"><a href="/about" class="nav-list__item__link">О компании</a></li>
           </ul>
         </nav>
         <div class="header-contact">
@@ -31,7 +31,7 @@
               <div class="payment-basket__status__basket"><span class="payment-basket__status__basket-value">0</span><span class="payment-basket__status__basket-value-descr">товаров</span></div>
             </div>
           </div>
-          <div class="authorization-block"><a href="#" class="authorization-block__link">Регистрация</a><a href="#" class="authorization-block__link">Войти</a></div>
+          <div class="authorization-block">{{$authUser->name}}<a href="/books/logout" class="authorization-block__link">Выйти</a></div>
         </div>
       </header>
       <div class="middle">
@@ -40,11 +40,9 @@
             <div class="sidebar-item__title">Категории</div>
             <div class="sidebar-item__content">
               <ul class="sidebar-category">
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Action</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">RPG</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Квесты</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Онлайн-игры</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Стратегии</a></li>
+                @foreach($sectionBooks as $section)
+                  <li class="sidebar-category__item"><a href="/category/{{$section->id}}" class="sidebar-category__item__link">{{$section->section_name}}</a></li>
+                @endforeach
               </ul>
             </div>
           </div>
@@ -53,15 +51,15 @@
             <div class="sidebar-item__content">
               <div class="sidebar-news">
                 <div class="sidebar-news__item">
-                  <div class="sidebar-news__item__preview-news"><img src="img/cover/game-2.jpg" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
+                  <div class="sidebar-news__item__preview-news"><img src="/img/cover/game-2.jpg" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
                   <div class="sidebar-news__item__title-news"><a href="#" class="sidebar-news__item__title-news__link">О новых играх в режиме VR</a></div>
                 </div>
                 <div class="sidebar-news__item">
-                  <div class="sidebar-news__item__preview-news"><img src="img/cover/game-1.jpg" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
+                  <div class="sidebar-news__item__preview-news"><img src="/img/cover/game-1.jpg" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
                   <div class="sidebar-news__item__title-news"><a href="#" class="sidebar-news__item__title-news__link">О новых играх в режиме VR</a></div>
                 </div>
                 <div class="sidebar-news__item">
-                  <div class="sidebar-news__item__preview-news"><img src="img/cover/game-4.jpg" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
+                  <div class="sidebar-news__item__preview-news"><img src="/img/cover/game-4.jpg" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
                   <div class="sidebar-news__item__title-news"><a href="#" class="sidebar-news__item__title-news__link">О новых играх в режиме VR</a></div>
                 </div>
               </div>
@@ -71,12 +69,12 @@
         <div class="main-content">
           <div class="content-top">
             <div class="content-top__text">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</div>
-            <div class="image-container"><img src="img/slider.png" alt="Image" class="image-main"></div>
+            <div class="image-container"><img src="/img/slider.png" alt="Image" class="image-main"></div>
           </div>
           <div class="content-middle">
             <div class="content-head__container">
               <div class="content-head__title-wrap">
-                <div class="content-head__title-wrap__title bcg-title">The Witcher 3: Wild Hunt в разделе action</div>
+                <div class="content-head__title-wrap__title bcg-title">в разделе {{$category->section_name}}</div>
               </div>
               <div class="content-head__search-block">
                 <div class="search-container">
@@ -89,32 +87,17 @@
             </div>
             <div class="content-main__container">
               <div class="product-container">
-                <div class="product-container__image-wrap"><img src="img/cover/game-1.jpg" class="image-wrap__image-product"></div>
+                <div class="product-container__image-wrap"><img src="/photo/{{$book->photo}}" class="image-wrap__image-product"></div>
                 <div class="product-container__content-text">
-                  <div class="product-container__content-text__title">SuperMario</div>
+                  <div class="product-container__content-text__title">{{$book->book_name}}</div>
                   <div class="product-container__content-text__price">
                     <div class="product-container__content-text__price__value">
-                      Цена: <b>400</b>
+                      Цена: <b>{{$book->price}}</b>
                       руб
-                    </div><a href="#" class="btn btn-blue">Купить</a>
+                    </div><a href="/order/store/{{$book->id}}" class="btn btn-blue">Купить</a>
                   </div>
                   <div class="product-container__content-text__description">
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                      in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                      deserunt mollit anim id est laborum. Sed ut perspiciatis
-                      unde omnis iste natus error sit voluptatem
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                    </p>
+                    <p>{{$book->description}}</p>
                   </div>
                 </div>
               </div>
@@ -131,17 +114,17 @@
               <div class="products-columns">
                 <div class="products-columns__item">
                   <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">The Witcher 3: Wild Hunt</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-1.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
+                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="/img/cover/game-1.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
                   <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
                 </div>
                 <div class="products-columns__item">
                   <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">Overwatch</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-2.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
+                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="/img/cover/game-2.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
                   <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
                 </div>
                 <div class="products-columns__item">
                   <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">Deus Ex: Mankind Divided</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-3.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
+                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="/img/cover/game-3.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
                   <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
                 </div>
               </div>
@@ -156,7 +139,7 @@
             <div class="random-product-container__content">
               <div class="item-product">
                 <div class="item-product__title-product"><a href="#" class="item-product__title-product__link">The Witcher 3: Wild Hunt</a></div>
-                <div class="item-product__thumbnail"><a href="#" class="item-product__thumbnail__link"><img src="img/cover/game-1.jpg" alt="Preview-image" class="item-product__thumbnail__link__img"></a></div>
+                <div class="item-product__thumbnail"><a href="#" class="item-product__thumbnail__link"><img src="/img/cover/game-1.jpg" alt="Preview-image" class="item-product__thumbnail__link__img"></a></div>
                 <div class="item-product__description">
                   <div class="item-product__description__products-price"><span class="products-price">400 руб</span></div>
                   <div class="item-product__description__btn-block"><a href="#" class="btn btn-blue">Купить</a></div>
@@ -186,6 +169,6 @@
         </div>
       </footer>
     </div>
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

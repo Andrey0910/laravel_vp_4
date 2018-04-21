@@ -10,22 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $data = [
-            'books' => Books::all(),
-            'sectionBooks' => SectionBooks::all(),
-            'authUser' => User::find(Auth::id())
+            'books' => Books::where('show', 1)->get(),
+            'sectionBooks' => SectionBooks::where('show', 1)->get(),
+            'authUser' => Auth::user()
         ];
         return view('index', $data);
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/login');
     }

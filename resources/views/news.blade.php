@@ -41,7 +41,7 @@
             <div class="sidebar-item__content">
               <ul class="sidebar-category">
                 @foreach($sectionBooks as $section)
-                  <li class="sidebar-category__item"><a href="/category/index/{{$section->id}}" class="sidebar-category__item__link">{{$section->section_name}}</a></li>
+                  <li class="sidebar-category__item"><a href="/category/{{$section->id}}" class="sidebar-category__item__link">{{$section->section_name}}</a></li>
                 @endforeach
               </ul>
             </div>

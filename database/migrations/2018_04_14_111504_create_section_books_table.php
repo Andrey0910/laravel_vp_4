@@ -17,6 +17,7 @@ class CreateSectionBooksTable extends Migration
             $table->increments('id');
             $table->string('section_name');
             $table->string('description');
+            $table->boolean('show')->default(1);
             $table->timestamps();
         });
         $faker = \Faker\Factory::create();

@@ -1,2 +1,0 @@
-SectionBooks template
-{{$asd}}

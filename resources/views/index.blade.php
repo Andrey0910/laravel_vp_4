@@ -89,9 +89,9 @@
               <div class="products-columns">
                 @foreach($books as $book)
                   <div class="products-columns__item">
-                    <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">{{$book->book_name}}</a></div>
-                    <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="/img/cover/{{$book->photo}}" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                    <div class="products-columns__item__description"><span class="products-price">{{$book->price}}</span><a href="#" class="btn btn-blue">Купить</a></div>
+                    <div class="products-columns__item__title-product"><a href="/product/{{$book->id}}" class="products-columns__item__title-product__link">{{$book->book_name}}</a></div>
+                    <div class="products-columns__item__thumbnail"><a href="/product/{{$book->id}}" class="products-columns__item__thumbnail__link"><img src="/photo/{{$book->photo}}" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
+                    <div class="products-columns__item__description"><span class="products-price">{{$book->price}}</span><a href="/product/{{$book->id}}" class="btn btn-blue">Купить</a></div>
                   </div>
                 @endforeach
               </div>

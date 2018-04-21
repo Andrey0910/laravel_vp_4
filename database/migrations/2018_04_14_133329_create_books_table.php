@@ -18,8 +18,9 @@ class CreateBooksTable extends Migration
             $table->string('book_name', 255);
             $table->integer('section_books_id');
             $table->integer('price');
-            $table->string('photo', 255);
-            $table->string('description');
+            $table->string('photo', 255)->default(null);
+            $table->string('description')->default(null);
+            $table->boolean('show')->default(1);
             $table->timestamps();
         });
 

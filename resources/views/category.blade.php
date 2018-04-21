@@ -74,7 +74,7 @@
           <div class="content-middle">
             <div class="content-head__container">
               <div class="content-head__title-wrap">
-                <div class="content-head__title-wrap__title bcg-title">Игры в разделе action</div>
+                <div class="content-head__title-wrap__title bcg-title">Игры в разделе {{$category->section_name}}</div>
               </div>
               <div class="content-head__search-block">
                 <div class="search-container">
@@ -89,9 +89,9 @@
               <div class="products-category__list">
                 @foreach($books as $book)
                   <div class="products-category__list__item">
-                    <div class="products-category__list__item__title-product"><a href="#">{{$book->book_name}}</a></div>
-                    <div class="products-category__list__item__thumbnail"><a href="#" class="products-category__list__item__thumbnail__link"><img src="/img/cover/game-6.jpg" alt="Preview-image"></a></div>
-                    <div class="products-category__list__item__description"><span class="products-price">{{$book->price}}</span><a href="#" class="btn btn-blue">Купить</a></div>
+                    <div class="products-category__list__item__title-product"><a href="/product/{{$book->id}}">{{$book->book_name}}</a></div>
+                    <div class="products-category__list__item__thumbnail"><a href="/product/{{$book->id}}" class="products-category__list__item__thumbnail__link"><img src="/photo/{{$book->photo}}" alt="Preview-image"></a></div>
+                    <div class="products-category__list__item__description"><span class="products-price">{{$book->price}}</span><a href="/product/{{$book->id}}" class="btn btn-blue">Купить</a></div>
                   </div>
                 @endforeach
               </div>

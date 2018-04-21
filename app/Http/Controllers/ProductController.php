@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Books;
 use App\SectionBooks;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class NewsController extends Controller
+class ProductController extends Controller
 {
-    public function index(){
+    public function index($book_id){
+        $book = Books::find($book_id);
+        $section_id = $book['section_books_id'];
         $data = [
+            'book' => $book,
+            'category' => SectionBooks::find($section_id),
             'sectionBooks' => SectionBooks::all(),
             'authUser' => Auth::user()
         ];
-        return view('news', $data);
+        return view('product', $data);
     }
 
     public function logout(){

@@ -12,7 +12,7 @@ class AboutController extends Controller
     public function index(){
         $data = [
             'sectionBooks' => SectionBooks::all(),
-            'authUser' => User::find(Auth::id())
+            'authUser' => Auth::user()
         ];
         return view('about', $data);
     }
