@@ -1,3 +1,11 @@
+@if($errors)
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    </ul>
+@endif
+
 <form action="/admin/category/update/{{$category->id}}" method="POST">
     {{csrf_field()}}
     <input type="text" name="section_name" value="{{$category->section_name}}" style="width: 50%"> <br>

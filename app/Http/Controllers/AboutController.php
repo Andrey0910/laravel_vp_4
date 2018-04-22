@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AboutController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = [
             'sectionBooks' => SectionBooks::all(),
             'authUser' => Auth::user()
@@ -17,7 +18,8 @@ class AboutController extends Controller
         return view('about', $data);
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/login');
     }

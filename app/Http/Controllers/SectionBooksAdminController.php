@@ -24,7 +24,7 @@ class SectionBooksAdminController extends Controller
 
     public function edit($category_id)
     {
-        if (empty(SectionBooks::find($category_id))){
+        if (empty(SectionBooks::find($category_id))) {
             abort(404);
         }
         $data['category'] = SectionBooks::find($category_id);
@@ -33,7 +33,11 @@ class SectionBooksAdminController extends Controller
 
     public function update($category_id, Request $request)
     {
-        if (empty(SectionBooks::find($category_id))){
+        $this->validate($request, [
+            'section_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255'
+        ]);
+        if (empty(SectionBooks::find($category_id))) {
             abort(404);
         }
         $category = SectionBooks::find($category_id);
@@ -50,6 +54,10 @@ class SectionBooksAdminController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'section_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255'
+        ]);
         $category = new SectionBooks();
         $category->section_name = $this->clearAll($request->get('section_name'));
         $category->description = $this->clearAll($request->get('description'));

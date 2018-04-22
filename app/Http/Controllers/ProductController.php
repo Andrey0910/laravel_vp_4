@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function index($book_id){
+    public function index($book_id)
+    {
         $book = Books::find($book_id);
         $section_id = $book['section_books_id'];
         $data = [
@@ -22,7 +23,8 @@ class ProductController extends Controller
         return view('product', $data);
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/login');
     }

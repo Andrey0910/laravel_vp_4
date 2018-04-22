@@ -1,3 +1,11 @@
+@if($errors)
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    </ul>
+@endif
+
 <form action="/admin/category/store" method="POST" enctype="multipart/form-data">
     {{csrf_field()}}
     <input type="text" name="section_name" style="width: 50%"> <br>

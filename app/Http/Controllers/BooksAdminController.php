@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Books;
 use App\Http\ImsgeResize;
 use Illuminate\Http\Request;
+use \Intervention\Image\ImageManager;
 
 class BooksAdminController extends Controller
 {
@@ -25,7 +26,7 @@ class BooksAdminController extends Controller
 
     public function edit($books_id)
     {
-        if (empty(Books::find($books_id))){
+        if (empty(Books::find($books_id))) {
             abort(404);
         }
         $data['books'] = Books::find($books_id);
@@ -34,14 +35,21 @@ class BooksAdminController extends Controller
 
     public function update($books_id, Request $request)
     {
-        if (empty(Books::find($books_id))){
+        $this->validate($request, [
+            'book_name' => 'required|string|max:255',
+            'section_books_id' => 'required|numeric',
+            'price' => 'required|numeric',
+            'photo' => 'image',
+            'description' => 'required|string|max:255'
+        ]);
+        if (empty(Books::find($books_id))) {
             abort(404);
         }
         $books = Books::find($books_id);
         $books->book_name = $this->clearAll($request->get('book_name'));
         $books->section_books_id = $request->get('section_books_id');
         $books->price = $request->get('price');
-        $books->photo = $this->addPhoto();;
+        $books->photo = $this->addPhoto($request->file('photo'));
         $books->description = $this->clearAll($request->get('description'));
         $books->save();
         return redirect('/admin/books');
@@ -54,11 +62,19 @@ class BooksAdminController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'book_name' => 'required|string|max:255',
+            'section_books_id' => 'required|numeric',
+            'price' => 'required|numeric',
+            'photo' => 'image',
+            'description' => 'required|string|max:255'
+        ]);
+
         $books = new Books();
         $books->book_name = $this->clearAll($request->get('book_name'));
         $books->section_books_id = $request->get('section_books_id');
         $books->price = $request->get('price');
-        $books->photo = $request->get('photo');
+        $books->photo = $this->addPhoto($request->file('photo'));
         $books->description = $this->clearAll($request->get('description'));
         $books->save();
         return redirect('/admin/books');
@@ -73,8 +89,20 @@ class BooksAdminController extends Controller
         return $data;
     }
 
-    public function addPhoto(){
-        $img = new ImsgeResize();
-        return $img->moveFile();
+    public function addPhoto($file)
+    {
+        $fileName = $file->getClientOriginalName();
+        $realPath = $file->getRealPath();
+        $manager = new ImageManager(array('driver' => 'gd')); // Вместо "imagick" должно быть прописано "gd"
+        // to finally create image instances
+        $img = $manager->make($realPath);
+        $img->resize(200, 200);
+        $dir = __DIR__ . "/../../../public/photo";
+        if (!file_exists($dir)) {
+            mkdir($dir, 0700, true);
+        }
+        $pathLocal = $dir . "/" . $fileName;
+        $img->save($pathLocal);
+        return $fileName;
     }
 }

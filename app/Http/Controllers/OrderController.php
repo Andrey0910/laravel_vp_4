@@ -42,7 +42,7 @@ class OrderController extends Controller
             </head>
             <body>
                 <p>Номер заказа ' . $order->id . '</p><br>
-                <p>Заказ: ' . $order->book_name. ' за ' . $order->price . ' рублей, 1 шт.</p><br>
+                <p>Заказ: ' . $order->book_name . ' за ' . $order->price . ' рублей, 1 шт.</p><br>
                 <p>ps: Спасибо - это ваш первый заказ!</p><br>
                 <p>Время заказа: ' . date("Y-m-d H:i:s") . '</p><br>
             </body>>';

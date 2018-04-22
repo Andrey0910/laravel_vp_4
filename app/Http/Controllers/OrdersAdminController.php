@@ -6,16 +6,17 @@ namespace App\Http\Controllers;
 use App\Order;
 use Illuminate\Http\Request;
 
-class OrdersAdminController
+class OrdersAdminController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data['orders'] = Order::all();
         return view('index-orders', $data);
     }
 
     public function edit($orders_id)
     {
-        if (empty(Order::find($orders_id))){
+        if (empty(Order::find($orders_id))) {
             abort(404);
         }
         $data['orders'] = Order::find($orders_id);
@@ -24,10 +25,10 @@ class OrdersAdminController
 
     public function update($orders_id, Request $request)
     {
-//        $this->validate($request, [
-//            'email' => 'required|string|email|max:255'
-//        ]);
-        if (empty(Order::find($orders_id))){
+        $this->validate($request, [
+            'email' => 'required|string|email|max:255'
+        ]);
+        if (empty(Order::find($orders_id))) {
             abort(404);
         }
         $orders = Order::find($orders_id);
